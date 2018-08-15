@@ -8,10 +8,16 @@ Thinking that some rogue user had inadvertently (or "advertently") shared those 
 
 Eventually we tracked the issue down to a "feature" of the Copy Link action bar item in Modern SharePoint document libraries. We discovered that Copy Link does a bit more than merely return a link to the document to the user's clipboard.
 
-[[image  -- the copy link action bar item]]
+![The Document Action Bar](https://github.com/dgusoff/blog/blob/master/Copy-Link-Security-Implications/images/copylink1.png.png?raw=true "The Document Action Bar")
 
 My client had been using SharePoint's Copy Link functionality to create those links, just as we had taught them to. But what we didn't realize was that clicking Copy Link was actually breaking the security inheritance on the document, and *sharing it* to the entire company.  This was because the tenant settings that drove this funcitonality were left in their default settings, which inexplicably default to the most permissive - the most insecure - setting.
 
-[[image of copy link with options selected]]
+Check out what happens when you click the button:
 
-When you select a document in SharePoint and click that Copy Link button, you're rpesented with a dialog
+![Copy Link Dialog](https://github.com/dgusoff/blog/blob/master/Copy-Link-Security-Implications/images/copylink2.png?raw=true "The Copy Link Dialog")
+
+Once you see this dialog, permission inheritance has already been broken and the permission "Anyone with the link can edit" has already been applied. If you select another option, the permission will update - even to the point of reinstating permission inheritance if "People With Existing Access" is selected. Also, the link regenerates, and previously generated links become stale and return 404s.
+
+
+
+At this point, actually clicking the Copy button is pointless - the file 
