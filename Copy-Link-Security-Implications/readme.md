@@ -18,6 +18,21 @@ Check out what happens when you click the button:
 
 Once you see this dialog, permission inheritance has already been broken and the permission "Anyone with the link can edit" has already been applied. If you select another option, the permission will update - even to the point of reinstating permission inheritance if "People With Existing Access" is selected. Also, the link regenerates, and previously generated links become stale and return 404s.
 
+![Copy Link Options](https://github.com/dgusoff/blog/blob/master/Copy-Link-Security-Implications/images/copylink3.png?raw=true "Copy Link Options")
+
+## The link structure will tell the sharing story
+
+If a Copy Link operation results in broken inheritance, it will look different from a link that does not.
+
+A Sharing Link looks like this:
+https://m365x692092.sharepoint.com/:w:/g/Ea90HDWefS1BnLLgtVkMNJgBdpUI6LiBC7Kw4pj0g-CIAQ?e=troe2t
+
+..while a non-shared link will look like this:
+https://m365x692092.sharepoint.com/:w:/r/Shared%20Documents/CAS/Marketing%20Strategy%20Future.docx?d=w351c74af7d9e412d9cb2e0b5590c3498&csf=1&e=TWfoVC
+
+Note that a sharing link shows the tenant followed by a long string of crap, and the non-sharing link, while also containing its share of trailing junk, also seems to incorporate a physical path as part of its structure. So using this pattern you should be able to tell if a Copy Link resulted in broken inheritance.
+
+## Know your tenant settings
 
 
-At this point, actually clicking the Copy button is pointless - the file 
+
