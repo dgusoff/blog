@@ -32,7 +32,14 @@ https://m365x692092.sharepoint.com/:w:/r/Shared%20Documents/CAS/Marketing%20Stra
 
 Note that a sharing link shows the tenant followed by a long string of crap, and the non-sharing link, while also containing its share of trailing junk, also seems to incorporate a physical path as part of its structure. So using this pattern you should be able to tell if a Copy Link resulted in broken inheritance.
 
+## My thoughts on this
+You have some options for setting the default behavior of this function, but like I said the default default is the most permissive. The decision to have it behave this way vexes me somewhat. In previous versions of SharePoint it's been difficult and tedious to break permission inheritance through the UI, and I think it ought to be that way. Breaking inheritance should only be done with serious consideration as it's difficualt to support and also has perfomrance implications - a Microsoft employee once told me that breaking inheritance "makes SQL cry". Maybe in the cloud we care less about performance implications because all that stuff is abstracted away. But it's still there and I'd have to believe Microsoft cares about its servers. Anyway...
+
 ## Know your tenant settings
+We can manage the tenant-wide default behavior for Copy Link by navigating directly to https://,tenant>-admin.sharepoint.com/_layouts/15/online/ExternalSharing.aspx
+
+There are a number of settings related to Sharing on this page but the ones we care about are under the headings "Default Link Type" and "Default Link Permission".
+
 
 
 
