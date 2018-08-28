@@ -14,7 +14,7 @@ If we choose the option to do this we get a slide out panel that allows us to se
 
 (image)
 
-Now, once we've done this, and we've enabled Content Approval on the Pages library (list settings-> versioning settings), we get the option to "Submit For Approval".
+Now, once we've done this, we get the option to "Submit For Approval". Clicking this option opens an initiation form where we can kick off the approval process. The users specified in the flow configuration will get the Approval email, and on approval the page will get published.
 
 (image)
 
@@ -22,4 +22,10 @@ Now, once we've done this, and we've enabled Content Approval on the Pages libra
 
 To enable scheduled item publishing we need to do two things. First, we need a way to specify the date on which we want to publish. An easy way to do this is to add a Date field onto the Site Pages library. Use a custom content type that inerits from Site Page add this field there.
 
-The second thing we need to do is modify the Flow to add a "Delay Until" action, using the Date field we added to our content type.
+The second thing we need to do is modify the Flow to add a "Delay Until" action, using the Date field we added to our content type. We'll put this inside the "Yes" branch of the condition that follows the approval result. It looks something like this:
+
+(image)
+
+Now, when we submit a page for approval, we can see the Flow waiting until the publish date and time before proceeding on to publish the page.
+
+(image)
