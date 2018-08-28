@@ -29,3 +29,19 @@ The second thing we need to do is modify the Flow to add a "Delay Until" action,
 Now, when we submit a page for approval, we can see the Flow waiting until the publish date and time before proceeding on to publish the page.
 
 (image)
+
+## Some things to be aware of
+
+All in all, this process works pretty well, but the whole Approval Flow business has some rough edges, and some things that don't quite work as well as they should.
+
+### There's no way to see configured Approval Flows for a library.
+SharePoint will happily allow you to configure many approval Flows on a single library, because the UI has no way to show you the Flow(s) that have already been configured. Unless there's a way I'm not aware of, the only way to see your approval Flow is to go directly to [Flow](https://flow.microsoft.com) and pick your Flow from the list.  Which can be a problem, especially considering...
+
+### Flows don't scale well.
+If you have 200 sites, you'll need to configure 200 separate instances of the Approval Flow. Obviously this is a governance and maintenance nightmare, and woe be upon the person who has to do all this grunt work, because Flow creation is not easily automated. One possibility might be to create a master Flow that all the other Flows call via HTTP request, and simply update each Approval Flow to launch that.
+
+### You're stuck naming individual people as approvers, no SharePoint or AD groups
+The UI doesn't allow for this, but the approval email actions don't allow this, so I think that's the cause of the limitation. We can do a little more work inside the Flow to fetch a SharePoint group but that's maybe a topic for another time.
+
+## Wrapping it up
+SharePoint's Modern initiative replaced a mature, battle-hardened system in Classic Publishing, and naturally there would be some funcitonality gaps to close. Microsoft is working quickly to address this, and it seems reasonable to expect further evelopments along this path. For now, at least we now have a way to deliver scheduled item publishing to our clients in Modern SharePoint.
