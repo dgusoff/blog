@@ -8,15 +8,16 @@ One of the Classic features my client use all the time is scheduled item publish
 
 On the Modern Site Pages library, in the Flow dropdown, we not have the option "Configure Page Approval Flow".
 
-(image)
+![Configure Page Approval](https://github.com/dgusoff/blog/blob/master/modern-pages-scheduled-item-publishing/pic1.png?raw=true "Configure Page Approval")
 
 If we choose the option to do this we get a slide out panel that allows us to set up our list of approvers.
 
-(image)
+![List of Approvers](https://github.com/dgusoff/blog/blob/master/modern-pages-scheduled-item-publishing/pic2.png?raw=true "List of Approvers")
+
+![List Approvers](https://github.com/dgusoff/blog/blob/master/modern-pages-scheduled-item-publishing/pic3.png?raw=true "List Approvers")
 
 Now, once we've done this, we get the option to "Submit For Approval". Clicking this option opens an initiation form where we can kick off the approval process. The users specified in the flow configuration will get the Approval email, and on approval the page will get published.
 
-(image)
 
 ## Updating the Flow to support scheduled item publishing
 
@@ -24,7 +25,10 @@ To enable scheduled item publishing we need to do two things. First, we need a w
 
 The second thing we need to do is modify the Flow to add a "Delay Until" action, using the Date field we added to our content type. We'll put this inside the "Yes" branch of the condition that follows the approval result. It looks something like this:
 
-(image)
+![Yes Branch](https://github.com/dgusoff/blog/blob/master/modern-pages-scheduled-item-publishing/pic4.png?raw=true "Yes Branch")
+
+
+![Delay Until](https://github.com/dgusoff/blog/blob/master/modern-pages-scheduled-item-publishing/pic5.png?raw=true "Delay Until")
 
 Now, when we submit a page for approval, we can see the Flow waiting until the publish date and time before proceeding on to publish the page.
 
