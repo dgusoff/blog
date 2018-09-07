@@ -32,7 +32,7 @@ The second thing we need to do is modify the Flow to add a "Delay Until" action,
 
 Now, when we submit a page for approval, we can see the Flow waiting until the publish date and time before proceeding on to publish the page.
 
-(image)
+![Delaying](https://github.com/dgusoff/blog/blob/master/modern-pages-scheduled-item-publishing/pic6.png?raw=true "Delaying")
 
 ## Some things to be aware of
 
