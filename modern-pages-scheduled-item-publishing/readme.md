@@ -47,5 +47,8 @@ If you have 200 sites, you'll need to configure 200 separate instances of the Ap
 ### You're stuck naming individual people as approvers, no SharePoint or AD groups
 The UI doesn't allow for this, but the approval email actions don't allow this, so I think that's the cause of the limitation. We can do a little more work inside the Flow to fetch a SharePoint group but that's maybe a topic for another time.
 
+### Flows crap out after 30 days
+If 30 days transpire after the invocation of a Flow, the Flow will just stop working. This seems to be a hard limit. So when submitting your Approval Flows, be aware of this limitation.
+
 ## Wrapping it up
 SharePoint's Modern initiative replaced a mature, battle-hardened system in Classic Publishing, and naturally there would be some funcitonality gaps to close. Microsoft is working quickly to address this, and it seems reasonable to expect further evelopments along this path. For now, at least we now have a way to deliver scheduled item publishing to our clients in Modern SharePoint.
