@@ -26,5 +26,32 @@ We have some options around how to specify the group we're using - either by its
 
 GET <site url>/_api/web/sitegroups/getbyname(<group name>)/users
   
+ Set up the HTTP Request to SharePoint Action
+ 
+ Parse the returned JSON
+ [code]
+ {
+  "value": [
+    {     
+      "Email": "AdeleV@M365x692098.OnMicrosoft.com"
+    },
+    {     
+      "Email": "GradyA@M365x692098.OnMicrosoft.com"
+    }
+  ]
+}
+[/code]
+
+Build the recipients string
+
+Set up the email action
+
+Test the Flow
+
+
+Call from another Flow
+
+
+  
  
 
