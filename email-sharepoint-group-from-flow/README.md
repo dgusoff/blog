@@ -6,7 +6,7 @@ One of the greatest features of Flow is the ability to send emails. But there is
 
 Flow doesn't allow an action to do this, and based on this Tech Community conversation (link) lots of people are asking for it. Recently Microsoft provided the ability to issue raw REST requests against SharePoint from a Flow, and indeed we can use this pattern to fetch users from a group. Once we have that list of users we can them email them using Flow.
 
-Creating a reusable Flow
+## Creating a reusable Flow
 
 I'm going to do something a little different with this Flow. I have a number of situations where I need to email SharePoint groups, and I don't want to have to do this work every time the requirement comes up. What I'm going to do instead is create a standalone Flow that only emails a group, that I can call from other Flows.
 
@@ -16,7 +16,7 @@ Because we want this Flow to be flexible and configurable, able to email any gro
 
 (screen shot of flow shell with HTTP trigger and response
 
-Setting up the REST Request
+## Setting up the REST Request
 
 Like I mentioned earlier, Flow gives us the ability to issue REST requests against SharePoint. If you've never worked with REST or with web services in general, it might seem a little daunting. But in Flow, the most difficult part of the process, authentication, is already handled for you, so all you have to do is craft the requests and parse the responses. Flows run under the security context of the user who authored the Flow, and the authentication headers will be automatically provided by Flow. (Note - there are some security implications to consider when authoring Flows - I'll discuss those at the end of this article.)
 
@@ -42,14 +42,16 @@ GET <site url>/_api/web/sitegroups/getbyname(<group name>)/users
 }
 [/code]
 
-Build the recipients string
+## Parse the JSON
 
-Set up the email action
+## Build the recipients string
 
-Test the Flow
+## Set up the email action
+
+## Test the Flow
 
 
-Call from another Flow
+## Call from another Flow
 
 
   
