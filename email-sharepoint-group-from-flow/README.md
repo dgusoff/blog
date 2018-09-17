@@ -43,6 +43,23 @@ GET <site url>/_api/web/sitegroups/getbyname(<group name>)/users
 [/code]
 
 ## Parse the JSON
+Now we've retrieved the data from SharePoint representing the group users. But the Flow only sees this as a string, even though it's JSON structured data. We need to tell the Flow to treat this as structured JSON, and to do this, we need the Parse JSON Action.
+
+So, after the SharePoint HTTP call, drop a Parse JSON action onto your design surface. Set it up to use the Body from the SharePOint HTTP call as its content.  For the schema, click the "use sample payload" link and paste this into it:
+
+{
+    "d": {
+      "results": [
+        {               
+          "Email": "AdeleV@mytenant.OnMicrosoft.com"
+        }
+      ]
+    }
+}
+
+So now your Parse JSON action looks like this:
+
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/pic3.png "Parse JSON")
 
 ## Build the recipients string
 
