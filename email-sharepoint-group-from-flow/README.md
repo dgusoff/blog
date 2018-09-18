@@ -12,7 +12,7 @@ I'm going to do something a little different with this Flow. I have a number of 
 
 One way to do this is to author the Flow using an HTTP trigger. That is, the Flow will listen on an HTTP endpoint, and be invoked whenever a request is made to it. The advantage of this trigger is that it can be invoked from pretty much anywhere: another Flow, an Azure Function, a console app, a mobile app, Postman, anything that can issue web requests can take advantage of this service.
 
-Because we want this Flow to be flexible and configurable, able to email any group on any site in our tenant, we're going to pass in the name of the group and the site URL to the Flow via JSON. Here's how the initial setup of the Flow looks so far:
+Because we want this Flow to be flexible and configurable, able to email any group on any site in our tenant, we're going to pass in the name of the group and the site URL to the Flow via JSON. Here's how the Flow trigger looks so far:
 
 ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/pic1.png "HTTP Trigger")
 
@@ -33,29 +33,22 @@ If you're not already familiar with the SharePoint REST interface, take a few mi
 
 We have some options around how to specify the group we're using - either by its name or by its numeric ID. We'll be using the group name in this example, because it seems like it would be a little more user friendly. Our REST request is going to query for all the users inside the group specified in the request, inside the site specified by the request.  It's going to look like this:
 
+````http
 GET <site url>/_api/web/sitegroups/getbyname(<group name>)/users
-  
- Set up the HTTP Request to SharePoint Action
- 
- Parse the returned JSON
- [code]
- {
-  "value": [
-    {     
-      "Email": "AdeleV@M365x692098.OnMicrosoft.com"
-    },
-    {     
-      "Email": "GradyA@M365x692098.OnMicrosoft.com"
-    }
-  ]
-}
-[/code]
+````
+
+Now, drop a "Send an HTTP request to SharePoint" action onto the diesign view after the trigger.  Set it up like this:
+
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/pic2.png "SharePoint request")
+
+OK, so now we've set up out trigger and used the data sent to it to invoke a call to SharePoint's REST interface, which will return the serialized user data as a string. Next we need to transform that into structured data the Flow can use.
 
 ## Parse the JSON
 Now we've retrieved the data from SharePoint representing the group users. But the Flow only sees this as a string, even though it's JSON structured data. We need to tell the Flow to treat this as structured JSON, and to do this, we need the Parse JSON Action.
 
 So, after the SharePoint HTTP call, drop a Parse JSON action onto your design surface. Set it up to use the Body from the SharePOint HTTP call as its content.  For the schema, click the "use sample payload" link and paste this into it:
 
+````json
 {
     "d": {
       "results": [
@@ -65,6 +58,7 @@ So, after the SharePoint HTTP call, drop a Parse JSON action onto your design su
       ]
     }
 }
+````
 
 So now your Parse JSON action looks like this:
 
