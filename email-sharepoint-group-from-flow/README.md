@@ -2,9 +2,9 @@
 
 tech community conversation: https://techcommunity.microsoft.com/t5/PowerApps-Flow/Email-a-SharePoint-Group-from-Flow/td-p/99737
 
-One of the greatest features of Flow is the ability to send emails. But there isn't a native way to send emails to SharePoint groups. Anyone who's done substantial work with workflows knows that emailing individual users is fraught with issues. People leave companies or change roles, and if a workflo21w explicitly names an individual as an email recipient, any personnel change will break existing processes, necessitating rework. The best practice in this situation is to email a group, and manage group membership as needed.
+One of the greatest features of Flow is the ability to send emails. But there isn't a native way to send emails to SharePoint groups. Anyone who's done substantial work with workflows knows that emailing individual users is fraught with issues. People leave companies or change roles, and if a workflow explicitly names an individual as an email recipient, any personnel change will break existing processes, necessitating rework. The best practice in this situation is to email a group, and manage group membership as needed.
 
-Flow doesn't allow an action to do this, and based on this Tech Community conversation (link) lots of people are asking for it. Recently Microsoft provided the ability to issue raw REST requests against SharePoint from a Flow, and indeed we can use this pattern to fetch users from a group. Once we have that list of users we can them email them using Flow.
+Flow doesn't allow an action to do this, and based on [this Tech Community conversation](https://techcommunity.microsoft.com/t5/PowerApps-Flow/Email-a-SharePoint-Group-from-Flow/td-p/99737) lots of people are asking for it. Recently Microsoft provided the ability to issue raw REST requests against SharePoint from a Flow, and indeed we can use this pattern to fetch users from a group. Once we have that list of users we can them email them using Flow.
 
 ## Creating a reusable Flow
 
@@ -14,7 +14,16 @@ One way to do this is to author the Flow using an HTTP trigger. That is, the Flo
 
 Because we want this Flow to be flexible and configurable, able to email any group on any site in our tenant, we're going to pass in the name of the group and the site URL to the Flow via JSON. Here's how the initial setup of the Flow looks so far:
 
-(screen shot of flow shell with HTTP trigger and response
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/pic1.png "HTTP Trigger")
+
+Use this sample payload to generate the JSON schema:
+
+````JSON
+{
+    "siteUrl": "foo",
+    "groupName": "foo"
+}
+````
 
 ## Setting up the REST Request
 
@@ -62,6 +71,11 @@ So now your Parse JSON action looks like this:
 ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/pic3.png "Parse JSON")
 
 ## Build the recipients string
+Nw we have what we need to start building out the recipients list for the Email action. We have a JSON array with all the users' email addresses. The next stap is to loop through array and build out our recipients list in a variable. The first step is to create the variable, so let's add an "Initialize Variable" action. Give it a string type and set its default value as empty. I'm calling mine "usersList":
+
+<<image of init variable>>
+  
+ Next we need to loop through the results array. Do do this we add an "Apply to Each" action.
 
 ## Set up the email action
 
@@ -69,6 +83,8 @@ So now your Parse JSON action looks like this:
 
 
 ## Call from another Flow
+
+## About those security implications
 
 
   
