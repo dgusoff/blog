@@ -65,9 +65,13 @@ So now your Parse JSON action looks like this:
 ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/pic3.png "Parse JSON")
 
 ## Build the recipients string
-Nw we have what we need to start building out the recipients list for the Email action. We have a JSON array with all the users' email addresses. The next stap is to loop through array and build out our recipients list in a variable. The first step is to create the variable, so let's add an "Initialize Variable" action. Give it a string type and set its default value as empty. I'm calling mine "usersList":
+A collection of recipients in a Flow Email action is represented by a semicolon list of email addresses. Since we now have an JSON array of objects containing these addresses, we now need to loop through the results and add the delimited email addresses into a string variable.
+
+First, let's create the variable and initialize it to an empty string:
 
 <<image of init variable>>
+    
+
   
  Next we need to loop through the results array. Do do this we add an "Apply to Each" action.
 
@@ -79,6 +83,9 @@ Nw we have what we need to start building out the recipients list for the Email 
 ## Call from another Flow
 
 ## About those security implications
+You should be logged in using a "service account" when authoring Flows. If you create the Flow using your normal user account, three things will happen. First, the emails will appear to be coming from yout user account; second, the Flow will assume the security context of your account, which means it'll break if your account's permissions con't perform the actions against the specified site. If you leave the company all your Flows will break.  And third, it will be difficult for your colleagues to maintain or even find the Flows you've written. 
+
+So create a "Flow Author" licensed account for this purpose. You can name it whatever makes sense to your organization.
 
 
   
