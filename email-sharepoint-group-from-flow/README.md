@@ -1,7 +1,5 @@
 # Email a SharePoint Group from a Flow
 
-tech community conversation: https://techcommunity.microsoft.com/t5/PowerApps-Flow/Email-a-SharePoint-Group-from-Flow/td-p/99737
-
 One of the greatest features of Flow is the ability to send emails. But there isn't a native way to send emails to SharePoint groups. Anyone who's done substantial work with workflows knows that emailing individual users is fraught with issues. People leave companies or change roles, and if a workflow explicitly names an individual as an email recipient, any personnel change will break existing processes, necessitating rework. The best practice in this situation is to email a group, and manage group membership as needed.
 
 Flow doesn't allow an action to do this, and based on [this Tech Community conversation](https://techcommunity.microsoft.com/t5/PowerApps-Flow/Email-a-SharePoint-Group-from-Flow/td-p/99737) lots of people are asking for it. Recently Microsoft provided the ability to issue raw REST requests against SharePoint from a Flow, and indeed we can use this pattern to fetch users from a group. Once we have that list of users we can them email them using Flow.
@@ -46,7 +44,7 @@ OK, so now we've set up out trigger and used the data sent to it to invoke a cal
 ## Parse the JSON
 Now we've retrieved the data from SharePoint representing the group users. But the Flow only sees this as a string, even though it's JSON structured data. We need to tell the Flow to treat this as structured JSON, and to do this, we need the Parse JSON Action.
 
-So, after the SharePoint HTTP call, drop a Parse JSON action onto your design surface. Set it up to use the Body from the SharePOint HTTP call as its content.  For the schema, click the "use sample payload" link and paste this into it:
+So, after the SharePoint HTTP call, drop a Parse JSON action onto your design surface. Set it up to use the Body from the SharePoint HTTP call as its content.  For the schema, click the "use sample payload" link and paste this into it:
 
 ````json
 {
@@ -65,7 +63,7 @@ So now your Parse JSON action looks like this:
 ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/pic3.png "Parse JSON")
 
 ## Build the recipients string
-A collection of recipients in a Flow Email action is represented by a semicolon list of email addresses. Since we now have an JSON array of objects containing these addresses, we now need to loop through the results and add the delimited email addresses into a string variable.
+A collection of recipients in a Flow Email action is represented by a semicolon delimited list of email addresses. Since we now have an JSON array of objects containing these addresses, we now need to loop through the results and add the delimited email addresses into a string variable.
 
 First, let's create the variable and initialize it to an empty string:
 
@@ -91,7 +89,7 @@ Add an "Office 365 Outlook - Send Email" action to the end of your Flow.  Add yo
 
 
 ## Test the Flow
-Now everything is wired up, and we can test this out. Since we have an HTTP-triggered Flow, we can use Fiddler or Postman to execure requests directly to the Flow. I like to use the VS Code "REST Client" extension (https://marketplace.visualstudio.com/items?itemName=humao.rest-client) since it's easy to use and I almost always have VS Code up and running anyway. We can grab the URL from the HTTP Trigger definition:
+Now everything is wired up, and we can test this out. Since we have an HTTP-triggered Flow, we can use Fiddler or Postman to execute requests directly to the Flow. I like to use the VS Code "REST Client" extension (https://marketplace.visualstudio.com/items?itemName=humao.rest-client) since it's easy to use and I almost always have VS Code up and running anyway. We can grab the URL from the HTTP Trigger definition:
 
 ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/get-url.png "Get Flow URL")
     
