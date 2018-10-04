@@ -87,11 +87,31 @@ Now we're getting close. We have our delimited recipient string pulled from a li
 Add an "Office 365 Outlook - Send Email" action to the end of your Flow.  Add your string variable on the "To" line. Fill out the values for Subject and Body (you can parameterize these as well if you need to. I'll leave that implementation up to you).
 
 
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/send_email.png "Send email")
+
 
 ## Test the Flow
+Now everything is wired up, and we can test this out. Since we have an HTTP-triggered Flow, we can use Fiddler or Postman to execure requests directly to the Flow. I like to use the VS Code "REST Client" extension (https://marketplace.visualstudio.com/items?itemName=humao.rest-client) since it's easy to use and I almost always have VS Code up and running anyway. We can grab the URL from the HTTP Trigger definition:
+
+<image>
+    
+And here's how we wire up the request in VS Code (Clicking "send request" will do what it says):
+
+<image>
+    
+If your Flow and request were wired up successfully you should get a 202 response back, and we should be able to see our execured Flow in the history section. Here we can see the inputs and outputs of each action and whether it secceeded or failed, and usually if we did something wrong it'll be obvious here.
+
+<image>
+    
+If your Flow succeeded your recipients ought to have the email in their inboxes.
+
+<image of inbox>
 
 
 ## Call from another Flow
+OK, now we have a working Flow that emails a SharePoint group. Now we want to reuse this Flow by calling it from other Flows.  To do this we use within that Flow a Request action.  Set up the URL and JSON in that action, run it, and if everything is done right, you've got a solution to email a SharePoint group that you can use in any of your Flows.
+
+<image - request action>
 
 ## About those security implications
 You should be logged in using a "service account" when authoring Flows. If you create the Flow using your normal user account, three things will happen. First, the emails will appear to be coming from yout user account; second, the Flow will assume the security context of your account, which means it'll break if your account's permissions con't perform the actions against the specified site. If you leave the company all your Flows will break.  And third, it will be difficult for your colleagues to maintain or even find the Flows you've written. 
