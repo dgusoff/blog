@@ -69,7 +69,7 @@ A collection of recipients in a Flow Email action is represented by a semicolon 
 
 First, let's create the variable and initialize it to an empty string:
 
-<<image of init variable>>
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/init_variable.png "Init Variable")
     
 
   
