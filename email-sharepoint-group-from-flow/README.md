@@ -73,9 +73,20 @@ First, let's create the variable and initialize it to an empty string:
     
 
   
- Next we need to loop through the results array. Do do this we add an "Apply to Each" action.
+ Next we need to loop through the results array. Do do this we add an "Apply to Each" action. This action is a little tough to find - you'll find it in the "more" section when you add an action to the end of your Flow:
+ 
+ ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/add_apply_to_each.png "Apply to Each")
+ 
+ You'll add as the input to this action the output from the Parse JSON action you set up earlier. It should be called "value". Inside the loop we'll put an "Append to String Variable" action, adding the "Email" property from the passed array, and adding a semicolon at the end.
+ 
+ ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/append_variable.png "Append Variable")
 
 ## Set up the email action
+Now we're getting close. We have our delimited recipient string pulled from a live SharePoint group, and we're ready to wire up the Email action.
+
+Add an "Office 365 Outlook - Send Email" action to the end of your Flow.  Add your string variable on the "To" line. Fill out the values for Subject and Body (you can parameterize these as well if you need to. I'll leave that implementation up to you).
+
+
 
 ## Test the Flow
 
