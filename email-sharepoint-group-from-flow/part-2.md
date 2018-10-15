@@ -22,4 +22,54 @@ In order to follow along you'll need the following:
 
 ### Creating the Custom Connector
 
-There are a couple different ways to generate a Custom Connector for Flow. We'll use a Postman collection 
+There are a couple different ways to generate a Custom Connector for Flow. We'll use a Postman collection to help us generate the API definition that Flow needs to set up the connector.
+
+We'll use the following data as the inputs for our Postman collection. Remember, our Flow is onvoked via a URL and :
+URL: https://prod-23.westus.logic.azure.com:443/workflows/0184591fa2bd4547b5ed01046cb51d18/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=qdPtgtY0Rn8vBAYNBLeISLh_I2s1etjWw7QrOZ_TO8Q
+
+POST Body:
+
+{
+    "siteUrl": "https://m365x981313.sharepoint.com/sites/Home",
+    "groupName": "Home Members"
+}
+
+In Postman, create a new collection by clicking "New", then "Collection" in the top menu.
+
+<image>
+  
+  Give it a name and click "Create".
+  
+  <image>
+  
+  Next, "Add Requests"
+  
+  <image>
+  
+  Next, "Open in Builder"
+  
+  <image>
+  
+  Change the method to "POST" and enter in the URL. Notice the parameters get parsed out of the URL and added to the params section of the request builder.
+  
+  <image>
+  
+  In the body section, click the "Raw" radio button and paste in our POST data:
+  
+<image>
+  
+Set up your Content-Type and Accept headers as shown:
+
+<image>
+  
+Click "Send to send the rqquest. If you've done everything properly, your Flow should have been called and executed successfully.
+
+<image>
+  
+  
+  
+  
+  
+  
+  
+
