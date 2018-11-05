@@ -35,7 +35,57 @@ POST Body:
 }
 ````
 
-I won't go into detail about how to create a Postman collection, (you can read about it here [Postman Collection](https://www.getpostman.com/docs/v6/postman/collections/creating_collections)), but in a nutshell you'll want to set up your POST request to your Flow URL and add the JSON to the body. Don't forget to set the Content-Type to application/json.
+I won't go into detail about how to create a Postman collection, (you can read about it here [Postman Collection](https://www.getpostman.com/docs/v6/postman/collections/creating_collections)), but in a nutshell you'll want to set up your POST request to your Flow URL and add the JSON to the body. Don't forget to set the Content-Type to application/json, and choose to export a V1 collection version.
+
+![alt text](https://github.com/dgusoff/blog/blob/master/email-sharepoint-group-from-flow/Postman.png? "Postman collection")
+
+Once you've exported the collection, you'll be ready to move into Flow and set up the custom connector.
+
+## Setting up the Custom Connector
+
+In Flow, click the gear icon in the top bar and select "Custom Connectors", then "Create Custom Connector" and select "Import a Postman Collection".
+
+Once the collection imports, you'll see a four-step wizard where you'll configure your connector.
+
+In step 1, General, you have options to change the default color and logo. You can accept the defaults or set a custom look for the connector. We'll stick with the defaults here.
+
+xxximage xxx
+
+In step 2, Authentication Type, leave the default at "No Authenticaiton"
+
+xxx image xxx
+
+Step 3, Definition, is the most involved. Here you can tweak your actions and add new ones. We'll have one action already defined, and you'll see the four query string parameters passed into the POST request. We'll want to hide these from the Flow author, so we'll click on each one, select "Edit", and set its visibility to "Internal"
+
+xx images xx
+
+Step 4, Test, will require we click the "Create Connector" button and actually consume the connector. We should see all our parameters, and if we add an appropriate POST body and click "Test Operation", we should get a 202 response back. Also we should see that our souce Flow was triggered and ran successfully.
+
+## Create the Flow
+
+Now we're ready to create our Flow and consume the custom connector. Here I'll just create a Button-triggered Flow and search my actions using the word "Email". You'll see I got two custom connectors back because I created two of them in my dev sandbox.
+
+xxx image xxx 
+
+When you configure the action it'll prompt you for a site url and a group name where the email will be sent. If I had set the visibility of the Content-Type parameter to "Hidden" that would have been gone form the interface as well.
+
+xxx image xxx
+
+Now you have a custom connector that you can re-use in all your flows to email any SharePoint group in any site your Flow author has access to. You also have a pattern for creating sub-Flows and a way to execute them in a scalable manner.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   
