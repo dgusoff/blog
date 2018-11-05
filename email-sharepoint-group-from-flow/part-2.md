@@ -35,7 +35,7 @@ POST Body:
 }
 ````
 
-I won't go into detail about how to create a Postman collection, (you can read about it here [Postman Collection](https://www.getpostman.com/docs/v6/postman/collections/creating_collections)), but in a nutshell you'll want to set up your POST request to your Flow URL and add the JSON to the body. Don't forget to set the Content-Type to application/json, and choose to export a V1 collection version.
+I won't go into detail about how to create a Postman collection, (you can read about it [here](https://www.getpostman.com/docs/v6/postman/collections/creating_collections), but in a nutshell you'll want to set up your POST request to your Flow URL and add the JSON to the body. Don't forget to set the Content-Type to application/json, and choose to export a V1 collection version.
 
 ![alt text](https://github.com/dgusoff/blog/blob/master/email-sharepoint-group-from-flow/Postman.png? "Postman collection")
 
