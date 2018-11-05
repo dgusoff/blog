@@ -8,7 +8,7 @@ In this blog we'll abstract away the details of that action by wrapping it in a 
 
 In other words, we're going to go from this:
 
-<image of raw http action>
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/email-sharepoint-group-from-flow/call-flow.png "Call Flow from another flow")
 
 
 to this:
