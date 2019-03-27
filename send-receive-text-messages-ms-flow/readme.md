@@ -156,8 +156,10 @@ We'll follow three steps to build out our sample Flow:
   
   We'll add a condition step, and inside the "choose a value" box we'll select "key" from the Dynamic Content selector. When we do this, Flow will automatially wrap that condition inside an Apply To Each iterator. When "Key" is equal to "Body" we'll store the value in a string variable, and then outside the loop we'll email the text message to ourselves, completing the Flow.
   
-  
-  
-  
+Here are the actions to complete the Flow:
+3 images
+
+### Testing
+Now let's send another text to the Twilio number. If all goes well, the Flow trigger again and light up green, and you'll have the text content in your Email inbox.
   
   
