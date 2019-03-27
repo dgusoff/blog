@@ -23,6 +23,18 @@ We'll follow three steps to build out our sample Flow:
   
   
   ### Create an HTTP-Triggered Flow
+  Go to Flow (link) and create a new Flow with an HTTP trigger.  Use the Create From Blank template and search using "HTTP" until you find the "When an HTTP request is received"  trigger, and select it.
+  
+  (image)
+  
+  Our tirgger will populate on the design surface. We won't be able to see the trigger's URL until after we save it, and we don't know what the post body schema is going to be, so we'll leave that blank for now.  Also, we need at least one action before we can save the Flow, so let's just create a variable to hold the POST body of the trigger request. We'll use it to generate our schema after we invoke our webhook for the first time.  I used the Initialize Variable ction, named the variable "Body", set its data type as Object, and initialized it to the "Body" element from the trigger request.
+  
+  (flow stub)
+  
+  
+  
+  
+  
   
   
   ### Set up our Webhook
