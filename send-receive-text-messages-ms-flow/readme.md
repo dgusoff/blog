@@ -39,6 +39,30 @@ We'll follow three steps to build out our sample Flow:
   
   
   ### Set up our Webhook
+  Once you've set up your Twilio trial account, you'll need to create a SMS Project and a phone number. I do not find Twilio's user interface easy to use, and I usually have to stumble around a bit before I can get anything done. But you'll need to create a new project of type "Programmaable SMS" and create a new phone number inside that project. To create a new number, go to https://www.twilio.com/console/phone-numbers/incoming and click the plus sign to obtain a new number. Once you have the number, go ahead and click it.
+  
+  Note: for trial accounts, you will only be able to send and receive texts between your Twilio number and the phone you use to set up the trial.
+  
+  Once you've clicked the number, look for the "Messaging" section and look for the "A message comes in" line. Paste your Flow URL into the text box and leave the defaults on the two dropdowns ("Webhook" and "Post"), and click Save.
+  
+  Your webhook is now pointing to your new Flow. Send a text message to the Twilio number from the phone you used to set up your trial, and navigate to the Flow you built earlier. If you've done everything correctly, you should see one successful run of your Flow.
+  
+  (flow_run)
+  
+  If you do not see any runs, then your webhook is misconfigured. If you see a run and it's failed, then something has gone wrong with the Flow.
+  
+  But assuming all went well, if you drill into the Flow run you can see th epOST data sent to the Flow in the Body variable we set up.
+  
+  (body value)
+  
+  Next we'll copy that text and use it to generate our expected body schema for the HTTP Trigger. Put the Flow in edit mode, open up the HTTP trigger, click "Use smaple payload to generate schema", and paste in the text from the Body variable:
+  
+  (body_schema_trigger)
+  
+  That body JSON looks something like this:
+  
+  link to json
+  
   
   
   ### Complete the Flow
