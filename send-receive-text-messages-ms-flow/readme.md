@@ -51,9 +51,14 @@ We'll follow three steps to build out our sample Flow:
   
   If you do not see any runs, then your webhook is misconfigured. If you see a run and it's failed, then something has gone wrong with the Flow.
   
-  But assuming all went well, if you drill into the Flow run you can see th epOST data sent to the Flow in the Body variable we set up.
+   ### Complete the Flow
+  
+  But assuming all went well, if you drill into the Flow run you can see the POST data sent to the Flow in the Body variable we set up.
   
   (body value)
+  
+  
+ 
   
   Next we'll copy that text and use it to generate our expected body schema for the HTTP Trigger. Put the Flow in edit mode, open up the HTTP trigger, click "Use smaple payload to generate schema", and paste in the text from the Body variable:
   
@@ -61,8 +66,98 @@ We'll follow three steps to build out our sample Flow:
   
   That body JSON looks something like this:
   
-  link to json
+  ``` json
+  {
+  "$content-type": "application/x-www-form-urlencoded",
+  "$content": "VG9Db3VudHJ5PVVTJlRvU3RhdGU9REMmU21zTWVzc2FnZVNpZD1TTTExZDE4MTgxZTYwOWE3YTIzYjA5ZDgyNDE2ZTg1ODc4Jk51bU1lZGlhPTAmVG9DaXR5PSZGcm9tWmlwPSZTbXNTaWQ9U00xMWQxODE4MWU2MDlhN2EyM2IwOWQ4MjQxNmRhdHVzPXJlY2VpdmVkJkZyb21DaXR5PSZCb2R5PUhlbGxvK3RoZXJlJkZyb21Db3VudHJ5PVVTJlRvPSUyQjEyMDI4NzM4MjAxJlRvWmlwPSZOdW1TZWdtZW50cz0xJk1lc3NhZ2VTaWQ9U00xMWQxODE4MWU2MDlhN2EyM2IwOWQ4MjQxNmU4NTg3OCZBY2NvdW50U2lkPUFDOGNlOTQwOTM1ZDU5MDBjY2YxNzdmMDQzZjc4NDgyYWEmRnJvbT0lMkIxNTE3Mjk1OTgwNiZBcGlWZXJzaW9uPTIwMTAtMDQtMDE=",
+  "$formdata": [
+    {
+      "key": "ToCountry",
+      "value": "US"
+    },
+    {
+      "key": "ToState",
+      "value": "DC"
+    },
+    {
+      "key": "SmsMessageSid",
+      "value": "SM11d18181e609a7a23b09d82416e85234"
+    },
+    {
+      "key": "NumMedia",
+      "value": "0"
+    },
+    {
+      "key": "ToCity",
+      "value": ""
+    },
+    {
+      "key": "FromZip",
+      "value": ""
+    },
+    {
+      "key": "SmsSid",
+      "value": "SM11d18181e609a7a23b09d82416e85987"
+    },
+    {
+      "key": "FromState",
+      "value": "MI"
+    },
+    {
+      "key": "SmsStatus",
+      "value": "received"
+    },
+    {
+      "key": "FromCity",
+      "value": ""
+    },
+    {
+      "key": "Body",
+      "value": "Hello there"
+    },
+    {
+      "key": "FromCountry",
+      "value": "US"
+    },
+    {
+      "key": "To",
+      "value": "+12028738201"
+    },
+    {
+      "key": "ToZip",
+      "value": ""
+    },
+    {
+      "key": "NumSegments",
+      "value": "1"
+    },
+    {
+      "key": "MessageSid",
+      "value": "SM11d18181e609a7a23b09d82416e85456"
+    },
+    {
+      "key": "AccountSid",
+      "value": "AC8ce940935d5900ccf177f043f78482aa"
+    },
+    {
+      "key": "From",
+      "value": "+15172953322"
+    },
+    {
+      "key": "ApiVersion",
+      "value": "2010-04-01"
+    }
+  ]
+}
+  
+  ```
+  
+  Notice that all the data we care about - namely the sender and the message itself - are buried in an array of key-value pairs. To get at this data we need to loop through all the pairs and check until we find what we're looking for. It's not ideal but it'll work. What we'll do it loop through the keys, look for the one named "Body", store the value of Body in a variable.
+  
+  We'll add a condition step, and inside the "choose a value" box we'll select "key" from the Dynamic Content selector. When we do this, Flow will automatially wrap that condition inside an Apply To Each iterator. When "Key" is equal to "Body" we'll store the value in a string variable, and then outside the loop we'll email the text message to ourselves, completing the Flow.
   
   
   
-  ### Complete the Flow
+  
+  
+  
