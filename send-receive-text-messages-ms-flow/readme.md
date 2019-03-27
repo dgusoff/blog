@@ -31,8 +31,9 @@ We'll follow three steps to build out our sample Flow:
   
   (flow stub)
   
+  Now give your Flow a name and save it. I named mine "Twilio Trigger" and note that once the Flow saves, the URL is populated in the action. Put this on your clipboard as we'll use it in the next step.
   
-  
+  (flow stub saved) 
   
   
   
