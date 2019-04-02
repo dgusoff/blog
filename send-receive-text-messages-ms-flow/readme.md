@@ -195,6 +195,11 @@ After configuring the conneciton you'll be able to fill ou tthe action details. 
 ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/twilio_action_3.png "Twilio action 3")
 
 
+### Possibilities
+Having the ability to interact with text massaging in Flow opens up a wide range of possibilities. Flow is a connection machine, and enables us to integrate with a wide array of services. Throw in some Azure functions and the power of Azure service offerings and we can implement anything we can imagine: AI-driven chat bots, reservation systems, reminders and notifications, social media monitoring, critical IT systems monitoring, just to name a few off the top of my head.
+
+
+
 ### Conclusion
 We can easily create mobile-ready integrations with Microsoft Flow that can send and receive text messages. Receiving text messages involves a webhook and a bit f setup, and sending text messages is a simple action out of the box.
 
