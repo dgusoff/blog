@@ -11,16 +11,16 @@ Microsoft Flow is becoming a go-to no-code tool for authoring business process a
 You'll need a few things set up in order to follow along:
 
 * You'll need an Office 365 license that includes Flow and Email
-* You'll need a [Twilio](https://www.twilio.com/) account. You can create a [free trial account](https://www.twilio.com/try-twilio) that includes a set amount of free credit to play around with. Twilio is a paid service, so you'll need to pay for using it in real applications, but the free trial comes with (I think) $15 dollars worth of credit, and you can send and receive a couple thousand text kessages with that amount, so you don't have to commit to anything until you're sure about the solution.
+* You'll need a [Twilio](https://www.twilio.com/) account. You can create a [free trial account](https://www.twilio.com/try-twilio) that includes a set amount of free credit to play around with. Twilio is a paid service, so you'll need to pay for using it in real applications, but the free trial comes with (I think) $15 dollars worth of credit, and you can send and receive a couple thousand text messages with that amount, so you don't have to commit to anything until you're sure about the solution.
 
 
 ### Building the solution
 
-We'll follow three steps to build out our sample Flow:
+We'll follow four steps to build out our sample Flow:
   1. Create a shell HTTP-triggered Flow
   2. Set up a webhook for incoming texts against our Twilio number
   3. Send ourselves an email with the text content
-  4. Send ourselves a text message repr=eating the incoming message back to us
+  4. Send ourselves a text message repeating the incoming message back to us
   
   
   ### Create an HTTP-Triggered Flow
@@ -63,9 +63,9 @@ We'll follow three steps to build out our sample Flow:
   ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/body_value.png "Body Value")
    
   
-  Next we'll copy that text and use it to generate our expected body schema for the HTTP Trigger. Put the Flow in edit mode, open up the HTTP trigger, click "Use smaple payload to generate schema", and paste in the text from the Body variable:
+  Next we'll copy that text and use it to generate our expected body schema for the HTTP Trigger. Put the Flow in edit mode, open up the HTTP trigger, click "Use sample payload to generate schema", and paste in the text from the Body variable:
   
-  (body_schema_trigger)
+  
   ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/body_schema_trigger.png "Body Schema Trigger")
     
   
@@ -157,7 +157,7 @@ We'll follow three steps to build out our sample Flow:
   
   ```
   
-  Notice that all the data we care about - namely the sender and the message itself - are buried in an array of key-value pairs. To get at this data we need to loop through all the pairs and check until we find what we're looking for. It's not ideal but it'll work. What we'll do it loop through the keys, look for the one named "Body", store the value of Body in a variable.
+  Notice that all the data we care about - namely the sender and the message itself - are buried in an array of key-value pairs. To get at this data from our Flow, we need to loop through all the pairs and check until we find what we're looking for. It's not ideal but it'll work. What we'll do is loop through the keys, look for the one named "Body", store the value of Body in a variable.
   
   We'll add a condition step, and inside the "choose a value" box we'll select "key" from the Dynamic Content selector. When we do this, Flow will automatially wrap that condition inside an Apply To Each iterator. When "Key" is equal to "Body" we'll store the value in a string variable, and then outside the loop we'll email the text message to ourselves, completing the Flow.
   
@@ -182,26 +182,26 @@ Sending a text message is much more straightforward.  There is a standard Twilio
 
 ## Setting up the Twilio connector
 
-The first time you set up any Twilio integrations in Flow you'll be prompted to flesh out your connector with the Account ID and auth token. Add a new action, search for "Twilio" and select the "Send text Message" action.
+The first time you set up any Twilio integrations in Flow you'll be prompted to flesh out your connector with the Account ID and auth token. Add a new action, search for "Twilio" and select the "Send Text Message" action.
 
 ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/twilio_action_1.png "Twilio action 1")
 
-If this is the first Twilio integraiton you've done on your tenant, Flow will prompt you to set up your connector. Give it a name and enter your Account ID and Auth Token.
+If this is the first Twilio integration you've done on your tenant, Flow will prompt you to set up your connector. Give it a name and enter your Account ID and Auth Token from the Twilio portal.
 
 ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/twilio_action_2.png "Twilio action 2")
 
-After configuring the conneciton you'll be able to fill ou tthe action details. The 'From' phone number will be a dropdown list of all the phine numbers associated with the account. The 'To' number is a plain text number, but if you have a trialk account you'll only be able to successfully message te=he number linked to your account, and the text is also a plain text field. Of couse you can use Flow dynamic data and functions inside these text fields.
+After configuring the connection you'll be able to fill out the action details. The 'From' phone number will be a dropdown list of all the phone numbers associated with the account. The 'To' number is a plain text number, but if you have a trial account you'll only be able to successfully message the number linked to your account, and the text is also a plain text field. Of couse you can use Flow dynamic data and functions inside these text fields.
 
 ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/twilio_action_3.png "Twilio action 3")
 
 
 ### Possibilities
-Having the ability to interact with text massaging in Flow opens up a wide range of possibilities. Flow is a connection machine, and enables us to integrate with a wide array of services. Throw in some Azure functions and the power of Azure service offerings and we can implement anything we can imagine: AI-driven chat bots, reservation systems, reminders and notifications, social media monitoring, critical IT systems monitoring, just to name a few off the top of my head.
+Having the ability to interact with text messaging in Flow opens up a wide range of possibilities. Flow is a connection machine, and enables us to integrate with a wide array of services. Throw in some Azure functions and the power of Azure service offerings and we can implement anything we can imagine: AI-driven chat bots, reservation systems, bulk reminders and notifications, social media monitoring, critical IT systems monitoring, just to name a few off the top of my head.
 
 
 
 ### Conclusion
-We can easily create mobile-ready integrations with Microsoft Flow that can send and receive text messages. Receiving text messages involves a webhook and a bit f setup, and sending text messages is a simple action out of the box.
+We can easily create mobile-ready integrations with Microsoft Flow that can send and receive text messages. Receiving text messages involves a webhook and a bit of setup, and sending text messages is a simple action out of the box.
 
 
 
