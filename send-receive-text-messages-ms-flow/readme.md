@@ -11,7 +11,7 @@ Microsoft Flow is becoming a go-to no-code tool for authoring business process a
 You'll need a few things set up in order to follow along:
 
 * You'll need an Office 365 license that includes Flow and Email
-* You'll need a [Twilio](https://www.twilio.com/) account. You can create a [free trial account](https://www.twilio.com/try-twilio) that includes a set amount of free credit to play around with. Twilio is a paid service, so you'll need to pay for using it in real applicaitons, but the free trial comes with (I think) $15 dollars worth of credit, and you can send and receive a couple thousand text kessages with that amount, so you don't have to commit to anything until you're sure about the solution.
+* You'll need a [Twilio](https://www.twilio.com/) account. You can create a [free trial account](https://www.twilio.com/try-twilio) that includes a set amount of free credit to play around with. Twilio is a paid service, so you'll need to pay for using it in real applications, but the free trial comes with (I think) $15 dollars worth of credit, and you can send and receive a couple thousand text kessages with that amount, so you don't have to commit to anything until you're sure about the solution.
 
 
 ### Building the solution
@@ -19,15 +19,16 @@ You'll need a few things set up in order to follow along:
 We'll follow three steps to build out our sample Flow:
   1. Create a shell HTTP-triggered Flow
   2. Set up a webhook for incoming texts against our Twilio number
-  3. Finish off the Flow and send ourselves an email with the text content
+  3. Send ourselves an email with the text content
+  4. Send ourselves a text message repr=eating the incoming message back to us
   
   
   ### Create an HTTP-Triggered Flow
-  Go to Flow (link) and create a new Flow with an HTTP trigger.  Use the Create From Blank template and search using "HTTP" until you find the "When an HTTP request is received"  trigger, and select it.
+  Go to [Flow](https://flow.micrsoft.com) and create a new Flow with an HTTP trigger.  Use the Create From Blank template and search using "HTTP" until you find the "When an HTTP request is received"  trigger, and select it.
   
   (image)
   
-  Our tirgger will populate on the design surface. We won't be able to see the trigger's URL until after we save it, and we don't know what the post body schema is going to be, so we'll leave that blank for now.  Also, we need at least one action before we can save the Flow, so let's just create a variable to hold the POST body of the trigger request. We'll use it to generate our schema after we invoke our webhook for the first time.  I used the Initialize Variable ction, named the variable "Body", set its data type as Object, and initialized it to the "Body" element from the trigger request.
+  Our trigger will populate on the design surface. We won't be able to see the trigger's URL until after we save the Flow, and we don't know what the post body schema is going to be, so we'll leave that blank for now.  Also, we need at least one action before we can save the Flow, so let's just create a variable to hold the POST body of the trigger request. We'll use it to generate our schema after we invoke our webhook for the first time.  I used the Initialize Variable action, named the variable "Body", set its data type as Object, and initialized it to the "Body" element from the trigger request.
   
   (flow stub)
   
@@ -39,7 +40,7 @@ We'll follow three steps to build out our sample Flow:
   
   
   ### Set up our Webhook
-  Once you've set up your Twilio trial account, you'll need to create a SMS Project and a phone number. I do not find Twilio's user interface easy to use, and I usually have to stumble around a bit before I can get anything done. But you'll need to create a new project of type "Programmaable SMS" and create a new phone number inside that project. To create a new number, go to https://www.twilio.com/console/phone-numbers/incoming and click the plus sign to obtain a new number. Once you have the number, go ahead and click it.
+  Once you've set up your Twilio trial account, you'll need to create a SMS Project and a phone number. I do not find Twilio's user interface easy to use, and I usually have to stumble around a bit before I can get anything done. But you'll need to create a new project of type "Programmable SMS" and create a new phone number inside that project. To create a new number, go to https://www.twilio.com/console/phone-numbers/incoming and click the plus sign to obtain a new number. Once you have the number, go ahead and click it.
   
   Note: for trial accounts, you will only be able to send and receive texts between your Twilio number and the phone you use to set up the trial.
   
