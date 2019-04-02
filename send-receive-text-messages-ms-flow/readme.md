@@ -69,7 +69,7 @@ We'll follow three steps to build out our sample Flow:
   ``` json
   {
   "$content-type": "application/x-www-form-urlencoded",
-  "$content": "VG9Db3VudHJ5PVVTJlRvU3RhdGU9REMmU21zTWVzc2FnZVNpZD1TTTExZDE4MTgxZTYwOWE3YTIzYjA5ZDgyNDE2ZTg1ODc4Jk51bU1lZGlhPTAmVG9DaXR5PSZGcm9tWmlwPSZTbXNTaWQ9U00xMWQxODE4MWU2MDlhN2EyM2IwOWQ4MjQxNmRhdHVzPXJlY2VpdmVkJkZyb21DaXR5PSZCb2R5PUhlbGxvK3RoZXJlJkZyb21Db3VudHJ5PVVTJlRvPSUyQjEyMDI4NzM4MjAxJlRvWmlwPSZOdW1TZWdtZW50cz0xJk1lc3NhZ2VTaWQ9U00xMWQxODE4MWU2MDlhN2EyM2IwOWQ4MjQxNmU4NTg3OCZBY2NvdW50U2lkPUFDOGNlOTQwOTM1ZDU5MDBjY2YxNzdmMDQzZjc4NDgyYWEmRnJvbT0lMkIxNTE3Mjk1OTgwNiZBcGlWZXJzaW9uPTIwMTAtMDQtMDE=",
+  "$content": "VG9Db3VudHJ5PVVTJlRvU3RhdGU9REMmUU2MDlhN2EyM2IwOWQ4MjQxNmU4NTg3OCZBY2NvdW50U2lkPUFDOGNlOTQwOTM1ZDU5MDBjY2YxNzdmMDQzZjc4NDgyYWEmRnJvbT0lMkIxNTE3Mjk1OTgwNiZBcGlWZXJzaW9uPTIwMTAtMDQtMDE=",
   "$formdata": [
     {
       "key": "ToCountry",
@@ -81,7 +81,7 @@ We'll follow three steps to build out our sample Flow:
     },
     {
       "key": "SmsMessageSid",
-      "value": "SM11d18181e609a7a23b09d82416e85234"
+      "value": "SM11d18181e323232323d82416e85234"
     },
     {
       "key": "NumMedia",
@@ -97,7 +97,7 @@ We'll follow three steps to build out our sample Flow:
     },
     {
       "key": "SmsSid",
-      "value": "SM11d18181e609a7a23b09d82416e85987"
+      "value": "SM11d18181e609a74244242416e85987"
     },
     {
       "key": "FromState",
@@ -133,11 +133,11 @@ We'll follow three steps to build out our sample Flow:
     },
     {
       "key": "MessageSid",
-      "value": "SM11d18181e609a7a23b09d82416e85456"
+      "value": "SM11d18181e21212121212416e85456"
     },
     {
       "key": "AccountSid",
-      "value": "AC8ce94732455900ccf177f043f78482aa"
+      "value": "ACxxxxxxxxxxxxxxxxxxa"
     },
     {
       "key": "From",
@@ -161,5 +161,12 @@ Here are the actions to complete the Flow:
 
 ### Testing
 Now let's send another text to the Twilio number. If all goes well, the Flow trigger again and light up green, and you'll have the text content in your Email inbox.
+
+### Sending Text Messages
+Sending a text message is much more straightforward.  There is a standard Twilio connector in Flow, and you need to set up your initial connection parameters before fleshing out the action.  To do this we need to grab our account SID and your auth token.  You can get these from the Twilio dashboard at www.twilio.com/console 
+
+[screen shot - twilio settings]
+
+
   
   
