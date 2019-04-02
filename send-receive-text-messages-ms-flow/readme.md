@@ -47,6 +47,8 @@ We'll follow three steps to build out our sample Flow:
   
   Once you've clicked the number, look for the "Messaging" section and look for the "A message comes in" line. Paste your Flow URL into the text box and leave the defaults on the two dropdowns ("Webhook" and "Post"), and click Save.
   
+  ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/webhook.png "webhook")
+  
   Your webhook is now pointing to your new Flow. Send a text message to the Twilio number from the phone you used to set up your trial, and navigate to the Flow you built earlier. If you've done everything correctly, you should see one successful run of your Flow.
   
   ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/flow_succeeded.png "Flow First Run")
