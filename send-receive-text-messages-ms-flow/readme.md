@@ -26,16 +26,17 @@ We'll follow three steps to build out our sample Flow:
   ### Create an HTTP-Triggered Flow
   Go to [Flow](https://flow.micrsoft.com) and create a new Flow with an HTTP trigger.  Use the Create From Blank template and search using "HTTP" until you find the "When an HTTP request is received"  trigger, and select it.
   
-  (image)
+  ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/http_trigger.png "HTTP Trigger")
+  
   
   Our trigger will populate on the design surface. We won't be able to see the trigger's URL until after we save the Flow, and we don't know what the post body schema is going to be, so we'll leave that blank for now.  Also, we need at least one action before we can save the Flow, so let's just create a variable to hold the POST body of the trigger request. We'll use it to generate our schema after we invoke our webhook for the first time.  I used the Initialize Variable action, named the variable "Body", set its data type as Object, and initialized it to the "Body" element from the trigger request.
   
-  (flow stub)
+  ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/flow_stub.png "Flow Stub")
+
   
   Now give your Flow a name and save it. I named mine "Twilio Trigger" and note that once the Flow saves, the URL is populated in the action. Put this on your clipboard as we'll use it in the next step.
   
-  (flow stub saved) 
-  
+  ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/flow_stub_saved.png "Flow Stub2")
   
   
   
@@ -48,22 +49,23 @@ We'll follow three steps to build out our sample Flow:
   
   Your webhook is now pointing to your new Flow. Send a text message to the Twilio number from the phone you used to set up your trial, and navigate to the Flow you built earlier. If you've done everything correctly, you should see one successful run of your Flow.
   
-  (flow_run)
+  ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/flow_succeeded.png "Flow First Run")
+  
   
   If you do not see any runs, then your webhook is misconfigured. If you see a run and it's failed, then something has gone wrong with the Flow.
   
    ### Complete the Flow
   
   But assuming all went well, if you drill into the Flow run you can see the POST data sent to the Flow in the Body variable we set up.
-  
-  (body value)
-  
-  
- 
+    
+  ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/body_value.png "Body Value")
+   
   
   Next we'll copy that text and use it to generate our expected body schema for the HTTP Trigger. Put the Flow in edit mode, open up the HTTP trigger, click "Use smaple payload to generate schema", and paste in the text from the Body variable:
   
   (body_schema_trigger)
+  ![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/body_schema_trigger.png "Body Schema Trigger")
+    
   
   That body JSON looks something like this:
   
@@ -158,7 +160,15 @@ We'll follow three steps to build out our sample Flow:
   We'll add a condition step, and inside the "choose a value" box we'll select "key" from the Dynamic Content selector. When we do this, Flow will automatially wrap that condition inside an Apply To Each iterator. When "Key" is equal to "Body" we'll store the value in a string variable, and then outside the loop we'll email the text message to ourselves, completing the Flow.
   
 Here are the actions to complete the Flow:
-3 images
+
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/text_msg_variable.png "Flow 1")
+
+
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/apply_to_each.png "Flow 2")
+
+
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/send_email.png "Flow 3")
+
 
 ### Testing
 Now let's send another text to the Twilio number. If all goes well, the Flow trigger again and light up green, and you'll have the text content in your Email inbox.
@@ -166,21 +176,22 @@ Now let's send another text to the Twilio number. If all goes well, the Flow tri
 ### Sending Text Messages
 Sending a text message is much more straightforward.  There is a standard Twilio connector in Flow, and you need to set up your initial connection parameters before fleshing out the action.  To do this we need to grab our account SID and your auth token.  You can get these from the Twilio dashboard at www.twilio.com/console 
 
-[screen shot - twilio settings]
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/twilio_project_settings.png "Twilio settings")
 
 ## Setting up the Twilio connector
 
 The first time you set up any Twilio integrations in Flow you'll be prompted to flesh out your connector with the Account ID and auth token. Add a new action, search for "Twilio" and select the "Send text Message" action.
 
-[twilio action 1]
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/twilio_action_1.png "Twilio action 1")
 
 If this is the first Twilio integraiton you've done on your tenant, Flow will prompt you to set up your connector. Give it a name and enter your Account ID and Auth Token.
 
-[twilio_action_2]
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/twilio_action_2.png "Twilio action 2")
 
 After configuring the conneciton you'll be able to fill ou tthe action details. The 'From' phone number will be a dropdown list of all the phine numbers associated with the account. The 'To' number is a plain text number, but if you have a trialk account you'll only be able to successfully message te=he number linked to your account, and the text is also a plain text field. Of couse you can use Flow dynamic data and functions inside these text fields.
 
-[twilio action 4]
+![alt text](https://raw.githubusercontent.com/dgusoff/blog/master/send-receive-text-messages-ms-flow/twilio_action_3.png "Twilio action 3")
+
 
 ### Conclusion
 We can easily create mobile-ready integrations with Microsoft Flow that can send and receive text messages. Receiving text messages involves a webhook and a bit f setup, and sending text messages is a simple action out of the box.
