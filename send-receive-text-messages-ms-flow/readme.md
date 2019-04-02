@@ -167,6 +167,26 @@ Sending a text message is much more straightforward.  There is a standard Twilio
 
 [screen shot - twilio settings]
 
+## Setting up the Twilio connector
+
+The first time you set up any Twilio integrations in Flow you'll be prompted to flesh out your connector with the Account ID and auth token. Add a new action, search for "Twilio" and select the "Send text Message" action.
+
+[twilio action 1]
+
+If this is the first Twilio integraiton you've done on your tenant, Flow will prompt you to set up your connector. Give it a name and enter your Account ID and Auth Token.
+
+[twilio_action_2]
+
+After configuring the conneciton you'll be able to fill ou tthe action details. The 'From' phone number will be a dropdown list of all the phine numbers associated with the account. The 'To' number is a plain text number, but if you have a trialk account you'll only be able to successfully message te=he number linked to your account, and the text is also a plain text field. Of couse you can use Flow dynamic data and functions inside these text fields.
+
+[twilio action 4]
+
+### Conclusion
+We can easily create mobile-ready integrations with Microsoft Flow that can send and receive text messages. Receiving text messages involves a webhook and a bit f setup, and sending text messages is a simple action out of the box.
+
+
+
+
 
   
   
